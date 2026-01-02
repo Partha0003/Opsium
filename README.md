@@ -192,7 +192,7 @@ pip install pandas numpy scikit-learn matplotlib
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Piritha-15/Opsium.git
+   git clone https://github.com/Partha0003/Opsium.git
    cd Opsium
    ```
 
