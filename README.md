@@ -338,15 +338,6 @@ The comprehensive notebook covers both segments of the solution:
 - **Network-wide optimization** beyond individual routes
 - **Predictive maintenance** integration with capacity planning
 
-## 🤝 Contributing
-
-We welcome contributions to improve the capacity planning framework:
-
-1. Fork the repository
-2. Create a feature branch
-3. Implement improvements with clear documentation
-4. Add tests and validation
-5. Submit a pull request with detailed description
 
 ## 📚 References & Resources
 
