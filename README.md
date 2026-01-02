@@ -521,6 +521,13 @@ Install via: `pip install pandas numpy scikit-learn matplotlib seaborn`
 
 ## Contributors
 
-- [Your Name/Team Name] - Project Lead and Developer
+
+Team Name: OneAboveAll
+Team Members:
+Partha Sarathy G
+Nithin bhargav G
+N Piritha
+
+Opsium – FedEx Tricolor Challenge Finalist
 
 For questions or collaborations, please reach out via GitHub Issues.
