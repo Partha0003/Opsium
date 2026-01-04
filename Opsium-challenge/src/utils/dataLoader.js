@@ -7,7 +7,8 @@ const CSV_FILES = {
   businessPlan: '/business_plan_capacity.csv',
   weeklyPlan: '/weekly_plan_capacity.csv',
   execution: '/execution_actuals.csv',
-  planningSummary: '/planning_vs_execution_summary.csv'
+  planningSummary: '/planning_vs_execution_summary.csv',
+  pricingDecisions: '/model_round3_capacity_decisions.csv'
 }
 
 function loadCSV(filePath) {
@@ -38,7 +39,8 @@ export async function loadAllData() {
       businessPlan,
       weeklyPlan,
       execution,
-      planningSummary
+      planningSummary,
+      pricingDecisions
     ] = await Promise.all([
       loadCSV(CSV_FILES.customerDemand),
       loadCSV(CSV_FILES.forecastedDemand),
@@ -46,7 +48,8 @@ export async function loadAllData() {
       loadCSV(CSV_FILES.businessPlan),
       loadCSV(CSV_FILES.weeklyPlan),
       loadCSV(CSV_FILES.execution),
-      loadCSV(CSV_FILES.planningSummary)
+      loadCSV(CSV_FILES.planningSummary),
+      loadCSV(CSV_FILES.pricingDecisions)
     ])
 
     // Process numeric fields
@@ -85,6 +88,10 @@ export async function loadAllData() {
       planningSummary: processNumeric(planningSummary, [
         'forecasted_demand', 'committed_capacity', 'actual_net_weight', 
         'void_capacity', 'load_factor'
+      ]),
+      pricingDecisions: processNumeric(pricingDecisions, [
+        'forecasted_demand', 'forecast_confidence', 'max_capacity', 
+        'committed_capacity', 'load_factor', 'void_capacity'
       ])
     }
   } catch (error) {
@@ -115,6 +122,16 @@ export function getDateData(routeData, date) {
     execution: routeData.execution.find(d => d.date === date),
     planningSummary: routeData.planningSummary.find(d => d.date === date)
   }
+}
+
+export function getPricingData(data, route) {
+  if (!data || !data.pricingDecisions) return []
+  return data.pricingDecisions.filter(d => d.route === route)
+}
+
+export function getPricingDataByDate(data, route, date) {
+  if (!data || !data.pricingDecisions) return null
+  return data.pricingDecisions.find(d => d.route === route && d.time_period === date)
 }
 
 export function getFlightData(data, flightId) {

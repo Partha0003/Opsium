@@ -10,6 +10,7 @@ import WeeklyPlan from './pages/WeeklyPlan'
 import Execution from './pages/Execution'
 import Comparison from './pages/Comparison'
 import Impact from './pages/Impact'
+import PricingStrategy from './pages/PricingStrategy'
 import './App.css'
 
 function Navigation() {
@@ -23,7 +24,8 @@ function Navigation() {
     { path: '/weekly-plan', label: 'Weekly Plan' },
     { path: '/execution', label: 'Execution' },
     { path: '/comparison', label: 'Comparison' },
-    { path: '/impact', label: 'Impact' }
+    { path: '/impact', label: 'Impact' },
+    { path: '/pricing-strategy', label: 'Pricing Strategy' }
   ]
 
   return (
@@ -90,6 +92,10 @@ function AppContent() {
             data={data}
             selectedRoute={selectedRoute}
             selectedDate={selectedDate}
+            selectedFlight={selectedFlight}
+            onRouteChange={setSelectedRoute}
+            onDateChange={setSelectedDate}
+            onFlightChange={setSelectedFlight}
           />
         } />
         <Route path="/forecast" element={
@@ -97,6 +103,10 @@ function AppContent() {
             data={data}
             selectedRoute={selectedRoute}
             selectedDate={selectedDate}
+            selectedFlight={selectedFlight}
+            onRouteChange={setSelectedRoute}
+            onDateChange={setSelectedDate}
+            onFlightChange={setSelectedFlight}
           />
         } />
         <Route path="/decision-engine" element={
@@ -105,6 +115,9 @@ function AppContent() {
             selectedRoute={selectedRoute}
             selectedDate={selectedDate}
             selectedFlight={selectedFlight}
+            onRouteChange={setSelectedRoute}
+            onDateChange={setSelectedDate}
+            onFlightChange={setSelectedFlight}
           />
         } />
         <Route path="/weekly-plan" element={
@@ -112,6 +125,10 @@ function AppContent() {
             data={data}
             selectedRoute={selectedRoute}
             selectedDate={selectedDate}
+            selectedFlight={selectedFlight}
+            onRouteChange={setSelectedRoute}
+            onDateChange={setSelectedDate}
+            onFlightChange={setSelectedFlight}
           />
         } />
         <Route path="/execution" element={
@@ -119,18 +136,43 @@ function AppContent() {
             data={data}
             selectedRoute={selectedRoute}
             selectedDate={selectedDate}
+            selectedFlight={selectedFlight}
+            onRouteChange={setSelectedRoute}
+            onDateChange={setSelectedDate}
+            onFlightChange={setSelectedFlight}
           />
         } />
         <Route path="/comparison" element={
           <Comparison 
             data={data}
             selectedRoute={selectedRoute}
+            selectedDate={selectedDate}
+            selectedFlight={selectedFlight}
+            onRouteChange={setSelectedRoute}
+            onDateChange={setSelectedDate}
+            onFlightChange={setSelectedFlight}
           />
         } />
         <Route path="/impact" element={
           <Impact 
             data={data}
             selectedRoute={selectedRoute}
+            selectedDate={selectedDate}
+            selectedFlight={selectedFlight}
+            onRouteChange={setSelectedRoute}
+            onDateChange={setSelectedDate}
+            onFlightChange={setSelectedFlight}
+          />
+        } />
+        <Route path="/pricing-strategy" element={
+          <PricingStrategy 
+            data={data}
+            selectedRoute={selectedRoute}
+            selectedDate={selectedDate}
+            selectedFlight={selectedFlight}
+            onRouteChange={setSelectedRoute}
+            onDateChange={setSelectedDate}
+            onFlightChange={setSelectedFlight}
           />
         } />
       </Routes>

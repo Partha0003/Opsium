@@ -3,7 +3,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { getRouteData } from '../utils/dataLoader'
 import './PageStyles.css'
 
-function BusinessPlan({ data, selectedRoute, selectedDate }) {
+function BusinessPlan({ data, selectedRoute, selectedDate, selectedFlight, onRouteChange, onDateChange, onFlightChange }) {
   const routeData = getRouteData(data, selectedRoute)
   const businessPlanData = routeData?.businessPlan || []
   
@@ -23,6 +23,33 @@ function BusinessPlan({ data, selectedRoute, selectedDate }) {
         <p className="page-subtitle">
           Long-term, static planning assumptions
         </p>
+      </div>
+
+      <div className="selector-group">
+        <div className="selector">
+          <label>Route</label>
+          <select value={selectedRoute} onChange={(e) => onRouteChange(e.target.value)}>
+            {data ? [...new Set(data.forecastedDemand.map(d => d.route))].map(route => (
+              <option key={route} value={route}>{route}</option>
+            )) : null}
+          </select>
+        </div>
+        <div className="selector">
+          <label>Date</label>
+          <select value={selectedDate} onChange={(e) => onDateChange(e.target.value)}>
+            {data ? [...new Set(data.forecastedDemand.map(d => d.time_period))].sort().map(date => (
+              <option key={date} value={date}>{date}</option>
+            )) : null}
+          </select>
+        </div>
+        <div className="selector">
+          <label>Flight</label>
+          <select value={selectedFlight} onChange={(e) => onFlightChange(e.target.value)}>
+            {data ? data.flightCapacity.map(f => (
+              <option key={f.flight_id} value={f.flight_id}>{f.flight_id}</option>
+            )) : null}
+          </select>
+        </div>
       </div>
 
       <div className="banner">

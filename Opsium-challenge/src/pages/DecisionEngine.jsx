@@ -3,7 +3,7 @@ import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Responsi
 import { getRouteData, getFlightData, calculateDemandStability, calculateCostExposure, getDelayRisk, getFlexibility, determineStrategy } from '../utils/dataLoader'
 import './PageStyles.css'
 
-function DecisionEngine({ data, selectedRoute, selectedDate, selectedFlight }) {
+function DecisionEngine({ data, selectedRoute, selectedDate, selectedFlight, onRouteChange, onDateChange, onFlightChange }) {
   const routeData = getRouteData(data, selectedRoute)
   const flightData = getFlightData(data, selectedFlight)
   const forecastData = routeData?.forecastedDemand || []
@@ -68,6 +68,33 @@ function DecisionEngine({ data, selectedRoute, selectedDate, selectedFlight }) {
         <p className="page-subtitle">
           The 4-Factor Decision Lens: How Opsium changes decisions without changing forecasts
         </p>
+      </div>
+
+      <div className="selector-group">
+        <div className="selector">
+          <label>Route</label>
+          <select value={selectedRoute} onChange={(e) => onRouteChange(e.target.value)}>
+            {data ? [...new Set(data.forecastedDemand.map(d => d.route))].map(route => (
+              <option key={route} value={route}>{route}</option>
+            )) : null}
+          </select>
+        </div>
+        <div className="selector">
+          <label>Date</label>
+          <select value={selectedDate} onChange={(e) => onDateChange(e.target.value)}>
+            {data ? [...new Set(data.forecastedDemand.map(d => d.time_period))].sort().map(date => (
+              <option key={date} value={date}>{date}</option>
+            )) : null}
+          </select>
+        </div>
+        <div className="selector">
+          <label>Flight</label>
+          <select value={selectedFlight} onChange={(e) => onFlightChange(e.target.value)}>
+            {data ? data.flightCapacity.map(f => (
+              <option key={f.flight_id} value={f.flight_id}>{f.flight_id}</option>
+            )) : null}
+          </select>
+        </div>
       </div>
 
       <div className="banner">
