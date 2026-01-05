@@ -368,6 +368,177 @@
   margin: 32px 0;
 }
 
+/* Comparison Page - Decision Quality Section */
+.decision-quality-section {
+  margin: 32px 0;
+  padding: 24px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+}
+
+.decision-quality-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.decision-quality-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: white;
+  padding: 16px;
+  border-radius: 6px;
+  border-left: 4px solid #4caf50;
+}
+
+.quality-checkmark {
+  font-size: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.quality-text {
+  flex: 1;
+}
+
+.quality-text strong {
+  display: block;
+  color: #2e276c;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.quality-text p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.quality-summary-line {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 2px solid #2e276c;
+  text-align: center;
+  font-size: 18px;
+  color: #2e276c;
+}
+
+/* Strategic Analysis Cards */
+.strategic-analysis {
+  margin: 32px 0;
+}
+
+.strategic-card {
+  background: #f8f9fa;
+  border-left: 4px solid #e95b1c;
+  padding: 24px;
+  border-radius: 6px;
+  height: 100%;
+}
+
+.strategic-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2e276c;
+  margin-bottom: 12px;
+}
+
+.strategic-card-content {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.7;
+}
+
+/* Strategy Summary Banner */
+.strategy-summary-banner {
+  margin: 32px 0;
+  padding: 24px;
+  background: linear-gradient(135deg, #2e276c 0%, #3d3578 100%);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.strategy-summary-text {
+  font-size: 20px;
+  color: white;
+  line-height: 1.6;
+}
+
+.strategy-summary-text strong {
+  font-weight: 700;
+}
+
+/* Comparison Card Badges */
+.warning-badge-inline {
+  display: inline-block;
+  margin-left: 12px;
+  padding: 4px 12px;
+  background: #fff4e6;
+  color: #f57c00;
+  border: 1px solid #ff9800;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.success-badge-inline {
+  display: inline-block;
+  margin-left: 12px;
+  padding: 4px 12px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #4caf50;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-tooltip-inline {
+  display: inline-block;
+  margin-left: 8px;
+  cursor: help;
+  font-size: 16px;
+  color: #666;
+  opacity: 0.7;
+  vertical-align: middle;
+}
+
+.info-tooltip-inline:hover {
+  opacity: 1;
+}
+
+.comparison-card-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .decision-quality-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .warning-badge-inline,
+  .success-badge-inline {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+}
+
 /* Pricing Strategy Page Styles */
 .pricing-context-section {
   margin: 32px 0;

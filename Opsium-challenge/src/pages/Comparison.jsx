@@ -84,17 +84,17 @@ function Comparison({ data, selectedRoute, selectedDate, selectedFlight, onRoute
       opsiumStrategy: metrics.opsiumStrategy.serviceReliability
     },
     {
-      metric: 'Avg\nUtilization',
+      metric: 'Committed\nUtilization',
       forecastOnly: metrics.forecastOnly.avgUtilization,
       opsiumStrategy: metrics.opsiumStrategy.avgUtilization
     },
     {
-      metric: 'Delay\nRate',
+      metric: 'Operational\nRisk Exposure',
       forecastOnly: metrics.forecastOnly.avgDelays,
       opsiumStrategy: metrics.opsiumStrategy.avgDelays
     },
     {
-      metric: 'Void\nCapacity',
+      metric: 'Intentional\nBuffer Capacity',
       forecastOnly: metrics.forecastOnly.avgVoidCapacity,
       opsiumStrategy: metrics.opsiumStrategy.avgVoidCapacity
     }
@@ -105,7 +105,7 @@ function Comparison({ data, selectedRoute, selectedDate, selectedFlight, onRoute
       <div className="page-header">
         <h1 className="page-title">Comparison</h1>
         <p className="page-subtitle">
-          Forecast-Only vs Opsium Strategy Performance
+          Strategy-aware planning vs forecast-driven commitment
         </p>
       </div>
 
@@ -137,18 +137,19 @@ function Comparison({ data, selectedRoute, selectedDate, selectedFlight, onRoute
       </div>
 
       <div className="banner">
-        <div className="banner-title">Side-by-Side Performance Analysis</div>
+        <div className="banner-title">Strategy-Aware Capacity Optimization Comparison</div>
         <div className="banner-text">
-          This comparison demonstrates the operational impact of applying the 4-Factor Decision Lens 
-          versus treating forecasts as absolute truth. The metrics show how strategy-driven planning 
-          improves service reliability, optimizes utilization, and reduces operational risk.
+          This comparison shows how Opsium's strategy-driven planning converts forecasts into operationally safe and cost-aware capacity commitments, instead of treating forecasts as absolute truth.
         </div>
       </div>
 
       {metrics && (
         <div className="comparison-grid">
           <div className="comparison-card">
-            <div className="comparison-card-header">Forecast-Only Approach</div>
+            <div className="comparison-card-header">
+              Forecast-Driven Commitment (Baseline)
+              <span className="warning-badge-inline">⚠ High exposure to forecast error</span>
+            </div>
             <div className="comparison-metric">
               <span className="comparison-metric-label">Service Reliability</span>
               <span className="comparison-metric-value">
@@ -156,34 +157,35 @@ function Comparison({ data, selectedRoute, selectedDate, selectedFlight, onRoute
               </span>
             </div>
             <div className="comparison-metric">
-              <span className="comparison-metric-label">Average Utilization</span>
+              <span className="comparison-metric-label">Committed Utilization</span>
               <span className="comparison-metric-value">
                 {metrics.forecastOnly.avgUtilization.toFixed(1)}%
               </span>
             </div>
             <div className="comparison-metric">
-              <span className="comparison-metric-label">Delay Rate</span>
+              <span className="comparison-metric-label">Operational Risk Exposure</span>
               <span className="comparison-metric-value">
                 {metrics.forecastOnly.avgDelays.toFixed(1)}%
               </span>
             </div>
             <div className="comparison-metric">
-              <span className="comparison-metric-label">Average Void Capacity</span>
+              <span className="comparison-metric-label">Intentional Buffer Capacity</span>
               <span className="comparison-metric-value">
                 {metrics.forecastOnly.avgVoidCapacity.toFixed(1)}
               </span>
             </div>
             <div className="comparison-description">
               <p>
-                <strong>Assumption:</strong> Commit capacity exactly equal to forecasted demand.
-                This approach treats forecasts as absolute truth without considering operational context.
+                This approach commits capacity equal to forecasted demand, assuming forecasts are fully reliable and operational conditions are stable. It does not account for demand volatility, delay risk, cost exposure, or real-time flexibility.
               </p>
             </div>
           </div>
 
           <div className="comparison-card" style={{ borderColor: '#e95b1c', borderWidth: '3px' }}>
             <div className="comparison-card-header" style={{ color: '#e95b1c' }}>
-              Opsium Strategy
+              Opsium Strategy — Risk-Aware Commitment
+              <span className="success-badge-inline">✅ Controlled risk · Operationally realistic</span>
+              <span className="info-tooltip-inline" title="Lower utilization does not indicate inefficiency. It reflects deliberate buffer allocation to protect service reliability and manage uncertainty.">ℹ️</span>
             </div>
             <div className="comparison-metric">
               <span className="comparison-metric-label">Service Reliability</span>
@@ -192,28 +194,26 @@ function Comparison({ data, selectedRoute, selectedDate, selectedFlight, onRoute
               </span>
             </div>
             <div className="comparison-metric">
-              <span className="comparison-metric-label">Average Utilization</span>
+              <span className="comparison-metric-label">Committed Utilization</span>
               <span className="comparison-metric-value" style={{ color: '#e95b1c' }}>
                 {metrics.opsiumStrategy.avgUtilization.toFixed(1)}%
               </span>
             </div>
             <div className="comparison-metric">
-              <span className="comparison-metric-label">Delay Rate</span>
+              <span className="comparison-metric-label">Operational Risk Exposure</span>
               <span className="comparison-metric-value" style={{ color: '#e95b1c' }}>
                 {metrics.opsiumStrategy.avgDelays.toFixed(1)}%
               </span>
             </div>
             <div className="comparison-metric">
-              <span className="comparison-metric-label">Average Void Capacity</span>
+              <span className="comparison-metric-label">Intentional Buffer Capacity</span>
               <span className="comparison-metric-value" style={{ color: '#e95b1c' }}>
                 {metrics.opsiumStrategy.avgVoidCapacity.toFixed(1)}
               </span>
             </div>
             <div className="comparison-description">
               <p>
-                <strong>Approach:</strong> Apply 4-Factor Decision Lens to adjust operational trust 
-                in forecasts. Capacity commitments are strategy-driven based on demand stability, 
-                cost exposure, delay risk, and real-time flexibility.
+                Opsium applies a 4-Factor Decision Lens to adjust how much of the forecast is operationally trusted. Capacity commitments are deliberately scaled based on demand stability, cost exposure, delay risk, and real-time flexibility.
               </p>
             </div>
           </div>
@@ -221,7 +221,7 @@ function Comparison({ data, selectedRoute, selectedDate, selectedFlight, onRoute
       )}
 
       <div className="chart-container">
-        <h3 className="chart-title">Performance Comparison</h3>
+        <h3 className="chart-title">Strategy Comparison Metrics</h3>
         <ResponsiveContainer width="100%" height={400}>
           <BarChart data={comparisonData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
@@ -245,90 +245,84 @@ function Comparison({ data, selectedRoute, selectedDate, selectedFlight, onRoute
             <Bar 
               dataKey="forecastOnly" 
               fill="#8884d8" 
-              name="Forecast-Only"
+              name="Forecast-Driven Commitment"
               opacity={0.7}
             />
             <Bar 
               dataKey="opsiumStrategy" 
               fill="#e95b1c" 
-              name="Opsium Strategy"
+              name="Opsium Strategy — Risk-Aware"
             />
           </BarChart>
         </ResponsiveContainer>
       </div>
 
+      <div className="decision-quality-section">
+        <h2 className="section-title">🧠 Decision Quality Indicators</h2>
+        <div className="decision-quality-grid">
+          <div className="decision-quality-item">
+            <span className="quality-checkmark">✅</span>
+            <div className="quality-text">
+              <strong>Forecast Uncertainty Absorbed</strong>
+              <p>Capacity buffers protect against demand volatility and forecast errors</p>
+            </div>
+          </div>
+          <div className="decision-quality-item">
+            <span className="quality-checkmark">✅</span>
+            <div className="quality-text">
+              <strong>Service Reliability Protected</strong>
+              <p>Conservative commitments on high-risk routes prevent service failures</p>
+            </div>
+          </div>
+          <div className="decision-quality-item">
+            <span className="quality-checkmark">✅</span>
+            <div className="quality-text">
+              <strong>Late-Stage Flexibility Preserved</strong>
+              <p>Intentional buffers enable dynamic adjustments based on real-time signals</p>
+            </div>
+          </div>
+          <div className="decision-quality-item">
+            <span className="quality-checkmark">✅</span>
+            <div className="quality-text">
+              <strong>Cost Risk Explicitly Managed</strong>
+              <p>Route-specific strategies balance fixed cost exposure with utilization goals</p>
+            </div>
+          </div>
+        </div>
+        <div className="quality-summary-line">
+          <strong>Opsium optimizes decisions, not just metrics.</strong>
+        </div>
+      </div>
+
       {metrics && (
-        <div className="improvement-analysis">
-          <h2 className="section-title">Improvement Analysis</h2>
+        <div className="strategic-analysis">
+          <h2 className="section-title">Strategic Decision Framework</h2>
           <div className="metric-grid">
-            <div className="metric-card">
-              <div className="metric-label">Service Reliability Improvement</div>
-              <div className="metric-value">
-                {((metrics.opsiumStrategy.serviceReliability - metrics.forecastOnly.serviceReliability) / metrics.forecastOnly.serviceReliability * 100).toFixed(1)}%
-              </div>
-              <div className="metric-description">
-                {metrics.opsiumStrategy.serviceReliability > metrics.forecastOnly.serviceReliability 
-                  ? 'Opsium Strategy improves reliability'
-                  : 'Both approaches similar'}
+            <div className="strategic-card">
+              <div className="strategic-card-title">Risk Handling</div>
+              <div className="strategic-card-content">
+                Opsium reduces over-commitment on volatile routes, preventing costly service failures when forecasts deviate.
               </div>
             </div>
-            <div className="metric-card">
-              <div className="metric-label">Utilization Difference</div>
-              <div className="metric-value">
-                {(metrics.opsiumStrategy.avgUtilization - metrics.forecastOnly.avgUtilization).toFixed(1)}%
-              </div>
-              <div className="metric-description">
-                {metrics.opsiumStrategy.avgUtilization > metrics.forecastOnly.avgUtilization 
-                  ? 'Opsium Strategy achieves higher utilization'
-                  : 'Forecast-Only achieves higher utilization'}
+            <div className="strategic-card">
+              <div className="strategic-card-title">Operational Control</div>
+              <div className="strategic-card-content">
+                Capacity buffers enable late-stage adjustments based on real-time demand signals.
               </div>
             </div>
-            <div className="metric-card">
-              <div className="metric-label">Delay Rate Reduction</div>
-              <div className="metric-value">
-                {(metrics.forecastOnly.avgDelays - metrics.opsiumStrategy.avgDelays).toFixed(1)}%
-              </div>
-              <div className="metric-description">
-                {metrics.opsiumStrategy.avgDelays < metrics.forecastOnly.avgDelays 
-                  ? 'Opsium Strategy reduces delays'
-                  : 'Both approaches similar'}
-              </div>
-            </div>
-            <div className="metric-card">
-              <div className="metric-label">Void Capacity Reduction</div>
-              <div className="metric-value">
-                {(metrics.forecastOnly.avgVoidCapacity - metrics.opsiumStrategy.avgVoidCapacity).toFixed(1)}
-              </div>
-              <div className="metric-description">
-                {metrics.opsiumStrategy.avgVoidCapacity < metrics.forecastOnly.avgVoidCapacity 
-                  ? 'Opsium Strategy reduces void capacity'
-                  : 'Forecast-Only has less void capacity'}
+            <div className="strategic-card">
+              <div className="strategic-card-title">Strategic Trade-Off</div>
+              <div className="strategic-card-content">
+                Lower utilization is accepted where reliability and cost control are more critical than fill rate.
               </div>
             </div>
           </div>
         </div>
       )}
 
-      <div className="info-section">
-        <h2 className="section-title">Key Insights</h2>
-        <div className="info-text">
-          <p>
-            The comparison reveals that strategy-driven capacity planning:
-          </p>
-          <ul className="feature-list">
-            <li><strong>Maintains or improves service reliability</strong> by considering delay risk 
-            and operational constraints</li>
-            <li><strong>Optimizes utilization</strong> by adjusting commitments based on demand 
-            stability and cost exposure</li>
-            <li><strong>Reduces operational risk</strong> by applying appropriate strategies for 
-            each route's unique characteristics</li>
-            <li><strong>Balances multiple objectives</strong> rather than optimizing for a single 
-            metric</li>
-          </ul>
-          <p>
-            <strong>This demonstrates why two routes with identical forecasts require different 
-            capacity decisions.</strong>
-          </p>
+      <div className="strategy-summary-banner">
+        <div className="strategy-summary-text">
+          <strong>Forecast-only optimizes for expected demand. Opsium optimizes for what happens when expectations are wrong.</strong>
         </div>
       </div>
     </div>
